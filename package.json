@@ -1,0 +1,19 @@
+{
+  "name": "fase2_backend_qualidade",
+  "version": "1.0.0",
+  "description": "Os professores da rede publica precisam postar as aulas e transmitir conhecimento  para alunos(as) de forma prática, centralizada e tecnológica, então, vamos refatorar o Back-end, utilizaremos a  plataforma de desenvolvimento node.js, e precisaremos persistir esses dados  em um banco de dados, seja ele SQL ou NoSQL.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
