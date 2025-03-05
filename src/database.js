@@ -1,4 +1,4 @@
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const server = process.env.SERVER; // SERVIDOR DE BD

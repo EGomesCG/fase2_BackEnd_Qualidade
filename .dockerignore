@@ -1,0 +1,31 @@
+# Ignorar arquivos de log
+*.log
+
+# Ignorar a pasta node_modules (as dependências serão instaladas no container)
+node_modules
+
+# Ignorar arquivos de configuração do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de ambiente
+.env
+
+# Ignorar arquivos de teste
+*.spec.js
+*.test.js
+
+# Ignorar diretórios de build
+/build
+/dist
+
+# Ignorar arquivos do Git
+.git
+.gitignore
+
+# Ignorar arquivos temporários
+tmp/
+temp/
+
+# Ignorar diretórios específicos
+coverage/
