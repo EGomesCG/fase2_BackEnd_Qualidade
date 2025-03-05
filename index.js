@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const postagemRoute = require('./routes/postagem');
+const postagemRoute = require('./src/routes/postagem');
 app.use('/postagem', postagemRoute);
 
 app.get('/', (req, res) => {
