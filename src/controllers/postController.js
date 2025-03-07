@@ -1,75 +1,81 @@
 const Post = require('../models/post');
 
-//Lista todos os post's
-exports.getAllPosts = async(req, res) => {
+// Lista todos os posts
+exports.getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find();
-        res.status(200).json(posts);
-        res.render('index', {posts});//Precisa renderizar a view correta de lista de post's
+        res.status(200).json({ success: true, data: posts });
     } catch (error) {
-        res.status(500).json({message: error.messagem});
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
-//Visualizar o detalhe do post
+// Visualizar o detalhe do post
 exports.getPostById = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if(!post){
-            return res.status(404).json({message: 'Post nao encontrado.'});
-        };
-        res.status(200).json(posts);
-        res.render('detail', {posts});//Precisa renderizar a view correta de detalhe do post    
-
+        if (!post) {
+            return res.status(404).json({ success: false, message: 'Post não encontrado.' });
+        }
+        res.status(200).json({ success: true, data: post });
     } catch (error) {
-        res.status(500).json({messagem: error.messagem});
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
-//Criação de um novo post
-exports.createPost = async (req,res) => {
-    const { title, content, author, createdAt } = req.body;
-    const post = new Post({ title, content, author, createdAt });
+// Criar um novo post
+exports.createPost = async (req, res) => {
+    const { title, content, author } = req.body;
+
+    // Validação simples
+    if (!title || !content || !author) {
+        return res.status(400).json({ success: false, message: 'Todos os campos são obrigatórios.' });
+    }
+
+    const post = new Post({ title, content, author });
 
     try {
         const newPost = await post.save();
-        res.status(200).json(newPost);
-        res.redirect('index');//Depois de salvar ir para lista de posts.
+        res.status(201).json({ success: true, data: newPost });
     } catch (error) {
-        res.status(500).json({messagem: error.messagem});
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
-//Atualização de um post
+// Atualizar um post
 exports.updatePost = async (req, res) => {
-    const { title, content, author } = req.body;
+    const { title, content } = req.body;
+
+    // Validação simples
+    if (!title && !content) {
+        return res.status(400).json({ success: false, message: 'Pelo menos um campo deve ser atualizado.' });
+    }
+
     try {
         const post = await Post.findById(req.params.id);
-        if(!post){
-            return  res.status(404).json({ message: 'Post não encontrado.'});
+        if (!post) {
+            return res.status(404).json({ success: false, message: 'Post não encontrado.' });
         }
-        post.title = title;
-        post.content = content;
-        
-        const updatePost = await post.save();
+        if (title) post.title = title;
+        if (content) post.content = content;
 
-        res.status(200).json(updatePost);
-        res.redirect('index');
+        const updatedPost = await post.save();
+        res.status(200).json({ success: true, data: updatedPost });
     } catch (error) {
-        res.status(500).json({messagem: error.messagem});
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
-//Deletar um post
+// Deletar um post
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (!post) {
-            return res.status(404).json({ message: 'Post não encontrado.' });
+            return res.status(404).json({ success: false, message: 'Post não encontrado.' });
         }
-        await post.remove();
-        res.status(200).json({ message: 'Post deletado com sucesso.' });
+        await post.deleteOne();
+        res.status(200).json({ success: true, message: 'Post deletado com sucesso.' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
