@@ -6,9 +6,9 @@ require('dotenv').config();
 
 const postagemRoute = require('./src/routes/postRoutes'); // Importa as rotas
 
-const app = express();
-const port = process.env.PORT || 3000; // Define a porta
-const mongoURI = process.env.MONGODB_URI;
+// const app = express();
+// const port = process.env.PORT || 3000; // Define a porta
+// const mongoURI = process.env.MONGODB_URI;
 
 // Middleware
 app.use(cors()); // Habilita CORS
@@ -23,8 +23,8 @@ mongoose.connect(mongoURI, {
 .then(() => console.log('Conexão com o MongoDB bem-sucedida!'))
 .catch(err => console.error('Erro de conexão com o MongoDB:', err));
 
-// Rotas
-app.use('/postagem', postagemRoute); // Define a rota principal para postagem
+// // Rotas
+// app.use('/postagem', postagemRoute); // Define a rota principal para postagem
 
 // Rota padrão
 app.get('/', (req, res) => {
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Algo deu errado!');
 });
 
-// Inicia o servidor
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+// // Inicia o servidor
+// app.listen(port, () => {
+//     console.log(`Servidor rodando em http://localhost:${port}`);
+// });
