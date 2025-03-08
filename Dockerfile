@@ -1,20 +1,20 @@
 # Usar uma imagem base do Node.js
-FROM node:14
+FROM node:20
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /usr/src/app
 
-# Copiar o package.json e package-lock.json para o diretório de trabalho
+# Copiar apenas package.json e package-lock.json antes para otimizar cache
 COPY package*.json ./
 
-# Instalar as dependências da aplicação
-RUN npm install
+# Instalar as dependências usando npm ci
+RUN npm ci
 
-# Copiar o restante da aplicação para o diretório de trabalho
+# Copiar o restante da aplicação
 COPY . .
 
-# Expor a porta que a aplicação vai rodar
+# Expor a porta 3000
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]  # Ajuste para o comando de produção, se necessário

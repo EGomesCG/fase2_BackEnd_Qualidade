@@ -1,5 +1,17 @@
 # fase2_BackEnd_Qualidade
-Os professores da rede publica precisam postar as aulas e transmitir conhecimento  para alunos(as) de forma prática, centralizada e tecnológica, então, vamos refatorar o Back-end, utilizaremos a  plataforma de desenvolvimento node.js, e precisaremos persistir esses dados  em um banco de dados, seja ele SQL ou NoSQL.
+
+Os professores da rede pública precisam postar as aulas e transmitir conhecimento...
+
+## 🚀 Fluxo de Desenvolvimento
+
+- **develop** → Branch de desenvolvimento onde novas funcionalidades e correções são testadas antes de serem enviadas para `main`.
+- **main** → Branch principal usada para produção. Apenas código estável é mesclado para cá.
+
+### 📌 Como contribuir?
+
+1. Faça um fork do repositório e crie uma branch a partir de `develop`.
+2. Desenvolva sua funcionalidade e envie um Pull Request para `develop`.
+3. Após a revisão, sua contribuição poderá ser mesclada na `main` para produção
 
 ## Começando
 
@@ -15,7 +27,7 @@ Liste as dependências e requisitos necessários.
 *Instalação*
 
 # Clone o repositório
-git clone https://github.com/USERNAME/REPOSITORY_NAME.git
+git clone https://github.com/EGomesCG/fase2_BackEnd_Qualidade.git
 
 # Navegue até o diretório do projeto
 cd REPOSITORY_NAME
