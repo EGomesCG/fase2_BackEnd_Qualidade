@@ -26,10 +26,10 @@ mongoose.connect(mongoURI, {
 // // Rotas
 // app.use('/postagem', postagemRoute); // Define a rota principal para postagem
 
-// Rota padrão
-app.get('/', (req, res) => {
-    res.send('Olá, mundo!');
-});
+// // Rota padrão
+// app.get('/', (req, res) => {
+//     res.send('Olá, mundo!');
+// });
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
