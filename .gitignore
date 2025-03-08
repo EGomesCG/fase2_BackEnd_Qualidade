@@ -9,7 +9,7 @@ build/
 *.log
 
 # Ignorar arquivos de ambiente
-.env
+# .env
 
 # Ignorar arquivos de configuração do sistema
 .DS_Store
@@ -17,7 +17,7 @@ Thumbs.db
 
 # Ignorar arquivos de teste
 *.spec.js
-*.test.js
+# *.test.js
 
 # Ignorar arquivos temporários
 tmp/

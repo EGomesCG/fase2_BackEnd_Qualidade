@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-CMD ["npm", "run", "dev"]  # Ajuste para o comando de produção, se necessário
+CMD ["npm", "run", "dev",  "app.js"]  # Ajuste para o comando de produção, se necessário

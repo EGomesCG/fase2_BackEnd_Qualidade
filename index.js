@@ -1,13 +1,30 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
 const app = express();
-const port = process.env.PORT || 3000; // Permitir configuração pela variável de ambiente
+
+const port = process.env.PORT || 3000; // Define a porta
+const mongoURI = process.env.MONGODB_URI;
+
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Conexão com o MongoDB
+mongoose.connect(`mongodb://${process.env.SERVER}/${process.env.DATABASE}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Conexão com o MongoDB bem-sucedida!'))
+.catch(err => console.error('Erro de conexão com o MongoDB:', err));
 
 // Middleware para interpretar JSON
 app.use(express.json());
 
-// Importar rotas
-const postagemRoute = require('./src/routes/postagem');
-app.use('/postagem', postagemRoute);
+const postagemRoute = require('./src/routes/postRoutes');
+app.use('/post', postagemRoute);
 
 // Rota principal
 app.get('/', (req, res) => {
@@ -24,3 +41,6 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
+
+
