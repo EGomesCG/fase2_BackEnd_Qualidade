@@ -4,14 +4,11 @@ const postController = require('../controllers/postController');
 const router = express.Router();
 
 router.get('/', postController.getAllPosts);
-
-router.post('/', (req, res) => {
-    res.send('Post criado');
-});
-
-router.delete('/{id}', (req, res) => {
-    res.send('Post deletado');
-});
+router.get('/:id', postController.getPostById);
+router.post('/', postController.createPost);
+router.post('/:id', postController.updatePost);
+router.delete('/:id', postController.deletePost);
+router.get('/:search', postController.getSearchPost);
 
 
 module.exports = router;
