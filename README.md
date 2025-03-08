@@ -51,6 +51,18 @@ Os professores da rede pública precisam postar as aulas e transmitir conhecimen
 * **dotenv**: [https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv) (para variáveis de ambiente)
 
 
+## Tecnologias Utilizadas
+
+* **Node.js**: [https://nodejs.org/](https://nodejs.org/)
+* **Express.js**: [https://expressjs.com/](https://expressjs.com/)
+* **MongoDB**: [https://www.mongodb.com/](https://www.mongodb.com/) ou **PostgreSQL**: [https://www.postgresql.org/](https://www.postgresql.org/)
+* **Mongoose**: [https://mongoosejs.com/](https://mongoosejs.com/) (se usar MongoDB) ou **Sequelize**: [https://sequelize.org/](https://sequelize.org/) (se usar PostgreSQL)
+* **Docker**: [https://www.docker.com/](https://www.docker.com/)
+* **GitHub Actions**: [https://github.com/features/actions](https://github.com/features/actions)
+* **Jest**: [https://jestjs.io/](https://jestjs.io/) (para testes)
+* **dotenv**: [https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv) (para variáveis de ambiente)
+
+
 ## Começando
 
 Instruções sobre como configurar o projeto localmente.
