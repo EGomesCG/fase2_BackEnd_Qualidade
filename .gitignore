@@ -9,22 +9,22 @@ build/
 *.log
 
 # Ignorar arquivos de ambiente
-.env
+#.env
 
 # Ignorar arquivos de configuração do sistema
 .DS_Store
 Thumbs.db
 
 # Ignorar arquivos de teste
-*.spec.js
-*.test.js
+#*.spec.js
+#*.test.js
 
 # Ignorar arquivos temporários
 tmp/
 temp/
 
 # Ignorar diretórios de cobertura de testes
-coverage/
+#coverage/
 
 # Ignorar arquivos de cache do npm
 npm-debug.log*

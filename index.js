@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const postagemRoute = require('./src/routes/postagem'); // Certifique-se de que o caminho está correto
+const postagemRoute = require('./src/routes/postRoutes'); // Certifique-se de que o caminho está correto
 
 const app = express();
 const port = process.env.PORT || 3001; // Alterado para evitar conflitos

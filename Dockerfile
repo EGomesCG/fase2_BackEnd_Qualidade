@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Expor a porta 3000
-EXPOSE 3000
+EXPOSE 3001
 
 # Comando para iniciar a aplicação
 CMD ["npm", "run", "dev"]  # Ajuste para o comando de produção, se necessário
