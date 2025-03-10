@@ -80,3 +80,24 @@ exports.deletePost = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+//Pesquisa ao Usuário no sistema
+exports.getSearchPost = async (req, res) => {
+    try {
+        const searchTerm = req.query.q;
+        if(!searchTerm){
+            return res.status(400).json({ message: 'Termo de busca não fornecido.' });
+        }
+        const posts = await Post.find({
+            $or: [
+                { title: { $regex: searchTerm, $options: 'i' } },
+                { content: { $regex: searchTerm, $options: 'i' } }
+            ]
+        });
+        res.status(200).json(posts);
+       
+    } catch (error) {
+        res.status(500).json({ message: error.message});
+    }
+};
+ 
