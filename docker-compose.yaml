@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    command: mongod --auth  # Habilita autenticação no MongoDB
+
+  app:
+    build: .
+    container_name: meu_app
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      PORT: 3001  # Definindo a nova porta para evitar conflito
+      MONGODB_URI: mongodb://root:example@mongodb:27017/mydatabase?authSource=admin
+    ports:
+      - "3001:3001"  # Alterado para refletir a nova porta
+    volumes:
+      - .:/usr/src/app
+    command: npm run dev
+
+volumes:
+  mongo-data:
