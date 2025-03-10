@@ -9,11 +9,11 @@ node_modules
 Thumbs.db
 
 # Ignorar arquivos de ambiente
-.env
+#.env
 
 # Ignorar arquivos de teste
-*.spec.js
-*.test.js
+#*.spec.js
+#*.test.js
 
 # Ignorar diretórios de build
 /build
@@ -28,4 +28,4 @@ tmp/
 temp/
 
 # Ignorar diretórios específicos
-coverage/
+#coverage/
