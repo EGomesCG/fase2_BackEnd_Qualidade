@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.Router();
 const postController = require('../controllers/postController');
 
-// Definir rotas
+const router = express.Router();
+
 router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getPostById);
 router.post('/', postController.createPost);
