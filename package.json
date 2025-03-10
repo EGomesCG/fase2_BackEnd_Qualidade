@@ -9,7 +9,6 @@
     "test": "mocha tests/**/*.test.js",
     "test:develop": "mocha tests/**/*.test.js --reporter spec",
     "coverage": "nyc mocha"
-    
   },
   "keywords": [],
   "author": "Seu Nome ou Nome da Equipe",
@@ -22,7 +21,7 @@
   },
   "devDependencies": {
     "chai": "^4.0.0",
-    "mocha": "^9.0.0",
+    "mocha": "^11.1.0",
     "nodemon": "^3.1.9",
     "nyc": "^17.1.0"
   }

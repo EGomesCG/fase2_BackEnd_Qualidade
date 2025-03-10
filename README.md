@@ -19,7 +19,7 @@ Instruções sobre como configurar o projeto localmente.
 
 ### Pré-requisitos
 
-Liste as dependências e requisitos necessários.
+Liste as dependências e requisitos necessários.npm install
 
 ```bash
 # Instalar as dependências
