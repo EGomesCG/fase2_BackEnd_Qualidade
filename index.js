@@ -7,19 +7,16 @@ const postagemRoute = require('./src/routes/postRoutes'); // Certifique-se de qu
 
 const app = express();
 const port = process.env.PORT || 3001; // Alterado para evitar conflitos
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nome_do_banco'; // Usando a variável de ambiente
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
 
 // Conexão com MongoDB
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('✅ Conexão com o MongoDB bem-sucedida!'))
-.catch(err => console.error('❌ Erro de conexão com o MongoDB:', err));
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Conectado ao MongoDB'))
+    .catch(err => console.error('Erro ao conectar ao MongoDB', err));
 
 // Definição das rotas
 app.use('/posts', postagemRoute);
@@ -36,6 +33,9 @@ app.use((err, req, res, next) => {
 });
 
 // Inicia o servidor
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${port}`);
 });
+
+// Exporta o app e o server
+module.exports = { app, server };
