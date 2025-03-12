@@ -41,15 +41,15 @@ jobs:
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: test  # Só roda deploy se os testes passarem
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Executa apenas na main
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Build project
-        run: npm run build  # Se precisar de um build antes do deploy
+        run: npm run build
 
       - name: Deploy application
-        run: echo "Deploy realizado com sucesso na branch main!"  # Aqui entra seu comando de deploy real
+        run: echo "Deploy realizado com sucesso na branch main!"
