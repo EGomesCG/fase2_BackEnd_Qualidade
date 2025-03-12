@@ -7,6 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "mocha tests/**/*.test.js",
+    "test2": "mocha tests/**/*.test.js",
     "test:develop": "mocha tests/**/*.test.js --reporter spec",
     "coverage": "nyc mocha"
   },
