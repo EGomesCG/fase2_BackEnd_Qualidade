@@ -1,19 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Importa o CORS
+const cors = require('cors');
 require('dotenv').config();
 
-const postagemRoute = require('./src/routes/postagem'); // Importa as rotas
+const postagemRoute = require('./src/routes/postRoutes'); // Importa as rotas
 
 const app = express();
-const port = process.env.PORT || 3000; // Define a porta
+const port = process.env.PORT || 3001; // Define a porta
 const mongoURI = process.env.MONGODB_URI;
 
 // Middleware
 app.use(cors()); // Habilita CORS
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Conexão com o MongoDB
 mongoose.connect(mongoURI, {
@@ -41,3 +40,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
+module.exports = app; 
