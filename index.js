@@ -7,7 +7,9 @@ const postagemRoute = require('./src/routes/postRoutes'); // Certifique-se de qu
 
 const app = express();
 const port = process.env.PORT || 3001; // Alterado para evitar conflitos
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nome_do_banco'; // Usando a variável de ambiente
+const mongoURI = process.env.MONGODB_URI; // Usando a variável de ambiente
+
+console.log('MongoDB URI:', mongoURI);
 
 // Middlewares
 app.use(cors());
@@ -33,9 +35,12 @@ app.use((err, req, res, next) => {
 });
 
 // Inicia o servidor
-const server = app.listen(port, () => {
-    console.log(`🚀 Servidor rodando em http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => {
+        console.log(`🚀 Servidor rodando em http://localhost:${port}`);
+    });
+}
 
-// Exporta o app e o server
-module.exports = { app, server };
+// Exporta o app
+
+module.exports = app;

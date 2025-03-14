@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, server } = require('../index'); // Agora importa corretamente
+const app = require('../index'); // Agora importa corretamente
 const { expect } = require('chai');
 
 describe('GET /posts', function () {

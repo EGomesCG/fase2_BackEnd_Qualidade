@@ -21,7 +21,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      PORT: 3001  # Definindo a nova porta para evitar conflito
+    
       MONGODB_URI: mongodb://root:example@mongodb:27017/mydatabase?authSource=admin
     ports:
       - "3001:3001"  # Alterado para refletir a nova porta
