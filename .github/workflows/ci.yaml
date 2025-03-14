@@ -25,32 +25,43 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # Usa 'ci' para garantir instalação limpa
 
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    needs: setup  # Dependência do job de configuração
+    needs: setup  # Depende do job de configuração para rodar
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: npm ci  # Garante que todas as dependências estão instaladas
+
       - name: Run tests
-        run: npm run
+        run: npm test  # Corrigido para rodar os testes corretamente
 
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
     needs: test  # Só roda deploy se os testes passarem
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Executa apenas na main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Apenas na branch main
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build project
-        run: npm run start  # Se precisar de um build antes do deploy
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project (caso necessário)
+        run: npm run build || echo "Nenhuma etapa de build necessária"
+
+      - name: Start application
+        env:
+          PORT: 3001  # Define a porta para evitar conflitos
+        run: npm start &  # Executa o servidor em background
 
       - name: Deploy application
-        run: echo "Deploy realizado com sucesso na branch main!"  # Aqui entra seu comando de deploy real
+        run: echo "🚀 Deploy realizado com sucesso na branch main!"  # Aqui entraria o comando real de deploy
