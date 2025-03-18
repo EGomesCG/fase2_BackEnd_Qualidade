@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const postRoutes = require('./routes/posts'); // Ajuste o caminho se necessário
+const postRoutes = require('./routes/postRoutes.js'); // Ajuste o caminho se necessário
 
 // Carregando variáveis de ambiente
 dotenv.config();
