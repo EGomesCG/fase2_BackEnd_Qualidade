@@ -9,7 +9,7 @@ build/
 *.log
 
 # Ignorar arquivos de ambiente
-#//.env
+#.env
 
 # Ignorar arquivos de configuração do sistema
 .DS_Store
