@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const postagemRoute = require('./src/routes/postRoutes'); // Importa as rotas
+const postagemRoute = require('./src/routes/postRoutes.js'); // Importa as rotas
 
 const app = express();
 const port = process.env.PORT || 3001; // Define a porta
