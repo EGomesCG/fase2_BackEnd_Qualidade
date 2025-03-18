@@ -26,17 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Set up Docker Compose
-        uses: docker/setup-buildx-action@v2
-
-      - name: Start MongoDB
-        run: docker-compose up -d
-        working-directory: ./ # Certifique-se de que o docker-compose.yaml está na raiz do seu repositório
-
-      - name: Wait for MongoDB to start
-        run: sleep 10 # Ajuste o tempo conforme necessário
-
+  
   test:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -48,13 +38,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Start MongoDB
-        run: docker-compose up -d
-        working-directory: ./ # Certifique-se de que o docker-compose.yaml está na raiz do seu repositório
-
-      - name: Wait for MongoDB to start
-        run: sleep 10 # Ajuste o tempo conforme necessário
 
       - name: Run tests
         run: npm run
