@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { add } = require('../math'); // Ajuste o caminho conforme sua estrutura
+const { add } = require('../math');
 
 describe('Funções Matemáticas', () => {
   it('deve somar dois números corretamente', () => {

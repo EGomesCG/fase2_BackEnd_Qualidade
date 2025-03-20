@@ -1,9 +1,9 @@
 const request = require('supertest');
-const { app, server } = require('../index'); // Agora importa corretamente
+const { app, server } = require('../index');
 const { expect } = require('chai');
 
 describe('GET /posts', function () {
-    this.timeout(5000); // ⬅️ Define timeout maior para evitar falhas por lentidão
+    this.timeout(5000);
 
     it('deve retornar todos os posts', async function () {
         const res = await request(app).get('/posts');

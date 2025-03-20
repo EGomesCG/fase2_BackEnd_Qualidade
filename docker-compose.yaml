@@ -12,7 +12,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    command: mongod --auth  # Habilita autenticação no MongoDB
+    command: mongod --auth 
 
   app:
     build: .
@@ -21,10 +21,10 @@ services:
     depends_on:
       - mongodb
     environment:
-      PORT: 3001  # Definindo a nova porta para evitar conflito
+      PORT: 3001  
       MONGODB_URI: mongodb://root:example@mongodb:27017/mydatabase?authSource=admin
     ports:
-      - "3001:3001"  # Alterado para refletir a nova porta
+      - "3001:3001" 
     volumes:
       - .:/usr/src/app
     command: npm run dev

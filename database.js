@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const mongoURI = process.env.MONGODB_URI; // Usa a variável do .env
+const mongoURI = process.env.MONGODB_URI; 
 
 class Database {
     constructor() {
@@ -13,7 +13,7 @@ class Database {
             .connect(mongoURI, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
-                authSource: "admin", // Necessário para autenticação
+                authSource: "admin", 
                 user: "root",
                 pass: "example"
             })

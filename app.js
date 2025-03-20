@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const postagemRoute = require('./src/routes/postRoutes.js'); // Importa as rotas
+const postagemRoute = require('./src/routes/postRoutes.js'); 
 
 const app = express();
-const port = process.env.PORT || 3001; // Define a porta
+const port = process.env.PORT || 3001; 
 const mongoURI = process.env.MONGODB_URI;
 
 // Middleware
@@ -23,7 +23,7 @@ mongoose.connect(mongoURI, {
 .catch(err => console.error('Erro de conexão com o MongoDB:', err));
 
 // Rotas
-app.use('/postagem', postagemRoute); // Define a rota principal para postagem
+app.use('/postagem', postagemRoute);
 
 // Rota padrão
 app.get('/', (req, res) => {

@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const postagemRoute = require('./src/routes/postRoutes.js'); // Certifique-se de que o caminho está correto
+const postagemRoute = require('./src/routes/postRoutes'); 
 
 const app = express();
-const port = process.env.PORT || 3001; // Alterado para evitar conflitos
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nome_do_banco'; // Usando a variável de ambiente
+const port = process.env.PORT || 3001; 
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nome_do_banco'; 
 
 // Middlewares
 app.use(cors());
