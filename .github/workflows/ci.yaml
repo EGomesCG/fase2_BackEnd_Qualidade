@@ -11,57 +11,43 @@ on:
       - develop
 
 jobs:
-  setup:
-    name: Setup Node.js and MongoDB
+  build-test:
     runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+        options: >-
+          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci  # Usa 'ci' para garantir instalação limpa
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: setup  # Depende do job de configuração para rodar
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm ci  # Garante que todas as dependências estão instaladas
-
-      - name: Run tests
-        run: npm test  # Corrigido para rodar os testes corretamente
-
-  deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: test  # Só roda deploy se os testes passarem
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Apenas na branch main
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
         run: npm ci
 
-      - name: Build project (caso necessário)
-        run: npm run build || echo "Nenhuma etapa de build necessária"
-
-      - name: Start application
+      - name: Run Tests
         env:
-          PORT: 3001  # Define a porta para evitar conflitos
-        run: npm start &  # Executa o servidor em background
+          MONGODB_URI: mongodb://root:example@localhost:27017/mydatabase?authSource=admin
+        run: npm test
 
-      - name: Deploy application
-        run: echo "🚀 Deploy realizado com sucesso na branch main!"  # Aqui entraria o comando real de deploy
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy simulation
+        run: echo "🚀 Deploy realizado com sucesso!"

@@ -4,11 +4,12 @@
   "description": "Os professores da rede pública precisam postar as aulas e transmitir conhecimento para alunos(as) de forma prática, centralizada e tecnológica. Vamos refatorar o Back-end, utilizando a plataforma de desenvolvimento Node.js e persistindo dados em um banco de dados, seja ele SQL ou NoSQL.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build":"node index.js",
-    "test": "mocha tests/**/*.test.js",
-    "coverage": "nyc mocha"
+    "kill-port": "fkill :3001 --force || echo 'Porta 3001 já liberada'",
+    "start": "npm run kill-port && node index.js",
+    "dev": "npm run kill-port && nodemon index.js",
+    "build": "node index.js",
+    "test": "npm run kill-port && mocha tests/**/*.test.js",
+    "coverage": "npm run kill-port && nyc mocha"
   },
   "keywords": [],
   "author": "Seu Nome ou Nome da Equipe",
@@ -19,10 +20,13 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.12.1",
-    "pg": "^8.13.3"
+    "pg": "^8.13.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "chai": "^4.5.0",
+    "fkill-cli": "^8.0.0",
     "mocha": "^11.1.0",
     "nodemon": "^3.1.9",
     "nyc": "^17.1.0",
