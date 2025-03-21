@@ -15,16 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mongodb:
-        image: mongo
+        image: mongo:latest
         ports:
           - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
         options: >-
-          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'" 
+          --health-cmd "echo 'db.runCommand({ ping: 1 })' | mongo --username root --password example --authenticationDatabase admin --quiet localhost/test" 
           --health-interval 10s 
-          --health-timeout 5s 
+          --health-timeout 10s 
           --health-retries 5
 
     steps:
@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Wait for MongoDB to be ready
+        run: |
+          echo "Aguardando MongoDB iniciar..."
+          sleep 15
+
       - name: Run Tests
         env:
           MONGODB_URI: mongodb://root:example@localhost:27017/mydatabase?authSource=admin
@@ -51,3 +56,4 @@ jobs:
     steps:
       - name: Deploy simulation
         run: echo "🚀 Deploy realizado com sucesso!"
+
