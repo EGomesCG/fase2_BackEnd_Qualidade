@@ -12,7 +12,7 @@ on:
 
 jobs:
   setup:
-    name: Setup Node.js
+    name: Setup Node.js and MongoDB
     runs-on: ubuntu-latest
 
     steps:
