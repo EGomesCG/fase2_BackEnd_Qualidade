@@ -1,59 +1,54 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
     branches:
       - main
-      - develop
   pull_request:
     branches:
       - main
-      - develop
 
 jobs:
-  build-test:
+  build-and-test:
     runs-on: ubuntu-latest
     services:
-      mongodb:
-        image: mongo:latest
+      mongo:
+        image: mongo
         ports:
           - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
         options: >-
-          --health-cmd "echo 'db.runCommand({ ping: 1 })' | mongo --username root --password example --authenticationDatabase admin --quiet localhost/test" 
-          --health-interval 10s 
-          --health-timeout 10s 
-          --health-retries 5
+          --health-cmd="mongosh --username root --password example --authenticationDatabase admin --eval 'db.adminCommand(\"ping\")'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Wait for MongoDB to be ready
         run: |
-          echo "Aguardando MongoDB iniciar..."
-          sleep 15
+          for i in {1..10}; do
+            if mongosh --host localhost --username root --password example --authenticationDatabase admin --eval "db.adminCommand('ping')"; then
+              echo "MongoDB is ready!"
+              break
+            fi
+            echo "Waiting for MongoDB..."
+            sleep 3
+          done
 
-      - name: Run Tests
+      - name: Run tests
         env:
           MONGODB_URI: mongodb://root:example@localhost:27017/mydatabase?authSource=admin
         run: npm test
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-test
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Deploy simulation
-        run: echo "🚀 Deploy realizado com sucesso!"
-

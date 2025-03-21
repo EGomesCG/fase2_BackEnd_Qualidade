@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const mongoURI = process.env.MONGODB_URI; // Usa a variável do .env
+const mongoURI = process.env.MONGODB_URI;
 
 class Database {
     constructor() {
@@ -13,17 +13,15 @@ class Database {
             .connect(mongoURI, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
-                authSource: "admin", // Necessário para autenticação
-                user: "root",
-                pass: "example"
             })
             .then(() => {
                 console.log('Conexão com o banco de dados bem-sucedida');
             })
             .catch((err) => {
                 console.error('Erro de conexão com o banco de dados:', err);
+                process.exit(1); // Faz o container falhar caso não conecte
             });
     }
 }
 
-module.exports = new Database();
+module.exports = new Database()

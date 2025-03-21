@@ -6,12 +6,17 @@ services:
     container_name: mongodb
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://root:example@localhost:27017/admin --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
     command: mongod --auth  # Habilita autenticação no MongoDB
 
   app:
@@ -19,12 +24,12 @@ services:
     container_name: meu_app
     restart: always
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     environment:
-    
-      MONGODB_URI: mongodb://root:example@mongodb:27017/mydatabase?authSource=admin
+      MONGODB_URI: ${MONGODB_URI}
     ports:
-      - "3001:3001"  # Alterado para refletir a nova porta
+      - "3001:3001"
     volumes:
       - .:/usr/src/app
     command: npm run dev
